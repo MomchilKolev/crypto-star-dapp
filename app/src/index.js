@@ -21,6 +21,9 @@ const App = {
       // get accounts
       const accounts = await web3.eth.getAccounts();
       this.account = accounts[0];
+      this.accounts = accounts;
+      console.log("accounts", accounts);
+      console.log("this.accounts", this.accounts);
     } catch (error) {
       console.error("Could not connect to contract or chain.");
     }
@@ -47,6 +50,13 @@ const App = {
       .call();
     document.getElementById("starname").innerHTML = starName;
     return starName;
+  },
+
+  checkOwner: async function () {
+    const checkId = document.getElementById("checkid").value;
+    const owner = await this.meta.methods.checkOwner(+checkId).call();
+    document.getElementById("owner").innerHTML = owner;
+    return owner;
   },
 };
 
